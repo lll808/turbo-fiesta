@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unifi WiFi Packages</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 90%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .package {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+        .package h2 {
+            margin: 0;
+            color: #0078D7;
+        }
+        .package p {
+            margin: 5px 0;
+        }
+        .package .price {
+            font-size: 1.2em;
+            color: green;
+        }
+        .package .original-price {
+            text-decoration: line-through;
+            color: #999;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            background: #0078D7;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #005bb5;
+        }
+        .form-section {
+            display: none;
+        }
+        .payment-section {
+            display: none;
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+    </style>
+    <script>
+        function showForm(packageSelected) {
+            document.getElementById('packages').style.display = 'none';
+            document.getElementById('form-section').style.display = 'block';
+            document.getElementById('selected-package').value = packageSelected;
+        }
+
+        function showPayment() {
+            document.getElementById('form-section').style.display = 'none';
+            document.getElementById('payment-section').style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Unifi WiFi Packages</h1>
+
+        <div id="packages">
+            <div class="package">
+                <h2>100 Mbps</h2>
+                <p class="price">RM 89 <span class="original-price">RM 99</span></p>
+                <button onclick="showForm('100 Mbps - RM 89')">Select</button>
+            </div>
+            <div class="package">
+                <h2>300 Mbps</h2>
+                <p class="price">RM 139 <span class="original-price">RM 167</span></p>
+                <button onclick="showForm('300 Mbps - RM 139')">Select</button>
+            </div>
+            <div class="package">
+                <h2>500 Mbps</h2>
+                <p class="price">RM 159 <span class="original-price">RM 209</span></p>
+                <button onclick="showForm('500 Mbps - RM 159')">Select</button>
+            </div>
+            <div class="package">
+                <h2>1 Gbps</h2>
+                <p class="price">RM 249 <span class="original-price">RM 289</span></p>
+                <button onclick="showForm('1 Gbps - RM 249')">Select</button>
+            </div>
+        </div>
+
+        <div id="form-section" class="form-section">
+            <h2>User Information</h2>
+            <form id="user-form" onsubmit="event.preventDefault(); showPayment();">
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="name" required><br><br>
+
+                <label for="address">Address:</label><br>
+                <textarea id="address" name="address" required></textarea><br><br>
+
+                <label for="id">ID:</label><br>
+                <input type="text" id="id" name="id" required><br><br>
+
+                <input type="hidden" id="selected-package" name="selected-package">
+
+                <button type="submit">Next</button>
+            </form>
+        </div>
+
+        <div id="payment-section" class="payment-section">
+            <h2>Payment Information</h2>
+            <p>Your selected package: <span id="display-package"></span></p>
+            <p>Payment QR Code:</p>
+            <img src="19e47df630bc35105fc7052ce6ca29f.jpg" alt="Payment QR Code">
+            <p>Customer Service:</p>
+            <img src="066e0dc12ebfe94fc9b928de23a5eef.png" alt="Customer Service QR Code">
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('user-form').addEventListener('submit', function() {
+            document.getElementById('display-package').textContent = document.getElementById('selected-package').value;
+        });
+    </script>
+</body>
+</html>
